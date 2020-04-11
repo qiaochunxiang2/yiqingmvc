@@ -25,14 +25,14 @@ import java.util.Map;
 @Api("user")
 public class UserController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CityController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
 
     @PostMapping("login")
     @ApiOperation(value = "登录", notes = "登录")
-    public CommonResult findAll(@RequestBody Map<String, Object> jsonData) {
+    public CommonResult findUser(@RequestBody Map<String, Object> jsonData) {
         CommonResult result = new CommonResult();
         try {
             User user = userService.findUser(jsonData);
@@ -43,6 +43,7 @@ public class UserController {
             }
         } catch (Exception e) {
             LOGGER.error(e.toString(), e);
+            e.printStackTrace();
             result.setState(500);
             result.setData("服务器错误");
         }

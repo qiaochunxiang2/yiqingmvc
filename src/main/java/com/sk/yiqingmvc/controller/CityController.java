@@ -33,6 +33,7 @@ public class CityController {
             result.setData(cities);
         } catch (Exception e) {
             LOGGER.error(e.toString(), e);
+            e.printStackTrace();
             result.setState(500);
             result.setData("服务器错误");
         }

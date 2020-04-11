@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sk.yiqingmvc.dao.YiQingMapper">
+
+    <insert id="addData">
+        insert into yiqing(id, cId, cName, addDiagnosis, cure, die, addSuspected, reduceSuspected, addICU, reduceICU,
+                           entryDate)
+        values (#{id}, #{cId}, #{cName}, #{addDiagnosis}, #{cure}, #{die}, #{addSuspected}, #{reduceSuspected},
+                #{addICU}, #{reduceICU}, #{entryDate})
+    </insert>
+
+    <select id="findAll" resultType="com.sk.yiqingmvc.model.YiQing">
+        select * from yiqing
+    </select>
+</mapper>
