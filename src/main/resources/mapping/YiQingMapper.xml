@@ -6,7 +6,7 @@
         insert into yiqing(id, cId, cName, addDiagnosis, cure, die, addSuspected, reduceSuspected, addICU, reduceICU,
                            entryDate)
         values (#{id}, #{cId}, #{cName}, #{addDiagnosis}, #{cure}, #{die}, #{addSuspected}, #{reduceSuspected},
-                #{addICU}, #{reduceICU}, #{entryDate})
+                #{addICU}, #{reduceICU}, CURDATE())
     </insert>
 
     <select id="findAll" resultType="com.sk.yiqingmvc.model.YiQing">
