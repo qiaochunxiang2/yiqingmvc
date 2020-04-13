@@ -11,7 +11,7 @@ public interface CityMapper {
     /**
      * 查询所有城市
      *
-     * @return  List<City>
+     * @return List<City>
      */
     List<City> findAll();
 }

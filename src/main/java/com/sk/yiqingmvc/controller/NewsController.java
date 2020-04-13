@@ -1,6 +1,5 @@
 package com.sk.yiqingmvc.controller;
 
-import com.sk.yiqingmvc.model.City;
 import com.sk.yiqingmvc.model.News;
 import com.sk.yiqingmvc.service.NewsService;
 import com.sk.yiqingmvc.util.CommonResult;
@@ -15,10 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * @author qiaochunxiang
- * @date 2020/4/12 14:28
- */
 @RestController
 @Api("news")
 @RequestMapping("news")

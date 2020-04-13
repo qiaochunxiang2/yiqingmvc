@@ -1,9 +1,6 @@
 package com.sk.yiqingmvc.model;
 
-/**
- * @author qiaochunxiang
- * @date 2020/4/11 12:28
- */
+@SuppressWarnings("unused")
 public class User {
     /**
      * 用户id

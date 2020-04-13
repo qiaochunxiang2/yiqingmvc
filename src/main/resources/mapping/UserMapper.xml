@@ -2,9 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sk.yiqingmvc.dao.UserMapper">
 
-
+    <!--    登录功能-->
     <select id="findUser" resultType="com.sk.yiqingmvc.model.User">
-        select * from user where username = #{username} and password = #{password}
+        select *
+        from user
+        where username = #{username}
+          and password = #{password}
     </select>
 
 </mapper>

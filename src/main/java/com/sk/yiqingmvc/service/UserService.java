@@ -7,10 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
-/**
- * @author qiaochunxiang
- * @date 2020/4/11 12:30
- */
 @Service
 public class UserService {
 
@@ -19,10 +15,11 @@ public class UserService {
 
     /**
      * 登录功能
-     * @param jsonData  用户信息
+     *
+     * @param jsonData 用户信息
      * @return User
      */
-    public User findUser(Map<String, Object> jsonData){
+    public User findUser(Map<String, Object> jsonData) {
         String username = (String) jsonData.get("username");
         String password = (String) jsonData.get("password");
         User user = new User();

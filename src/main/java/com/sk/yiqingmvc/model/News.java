@@ -1,10 +1,9 @@
 package com.sk.yiqingmvc.model;
 
-/**
- * @author qiaochunxiang
- * @date 2020/4/12 14:13
- */
+
+@SuppressWarnings("unused")
 public class News {
+
     /**
      * id
      */

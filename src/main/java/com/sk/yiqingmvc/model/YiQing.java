@@ -2,10 +2,6 @@ package com.sk.yiqingmvc.model;
 
 import java.util.Date;
 
-/**
- * @author qiaochunxiang
- * @date 2020/4/11 13:19
- */
 @SuppressWarnings("unused")
 public class YiQing {
 

@@ -2,17 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sk.yiqingmvc.dao.CityMapper">
 
+
     <resultMap id="city1" type="com.sk.yiqingmvc.model.City">
         <id column="id" property="id"/>
         <result property="name" column="name"/>
-        <collection property="shi"  ofType="com.sk.yiqingmvc.model.City">
+        <collection property="shi" ofType="com.sk.yiqingmvc.model.City">
             <id property="id" column="id2"/>
             <result property="name" column="name2"/>
         </collection>
     </resultMap>
 
+    <!--    查询所有的省以及下属市-->
     <select id="findAll" resultMap="city1">
-        select a.*, b.id as id2, b.name as name2  from city a, city b where a.pId = 0 and a.id = b.pId
+        select a.*, b.id as id2, b.name as name2
+        from city a,
+             city b
+        where a.pId = 0
+          and a.id = b.pId
     </select>
 
 </mapper>

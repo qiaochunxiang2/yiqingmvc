@@ -5,10 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * @author qiaochunxiang
- * @date 2020/4/12 14:21
- */
 @Repository
 public interface NewsMapper {
     /**

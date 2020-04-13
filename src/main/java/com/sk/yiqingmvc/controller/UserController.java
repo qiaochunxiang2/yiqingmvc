@@ -16,10 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author qiaochunxiang
- * @date 2020/4/11 12:32
- */
 @RestController
 @RequestMapping("user")
 @Api("user")
@@ -36,7 +32,7 @@ public class UserController {
         CommonResult result = new CommonResult();
         try {
             User user = userService.findUser(jsonData);
-            if (user != null){
+            if (user != null) {
                 result.setData(true);
             } else {
                 result.setData(false);

@@ -2,14 +2,58 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sk.yiqingmvc.dao.YiQingMapper">
 
+    <!--    疫情上报-->
     <insert id="addData">
         insert into yiqing(id, cId, cName, addDiagnosis, cure, die, addSuspected, reduceSuspected, addICU, reduceICU,
                            entryDate)
         values (#{id}, #{cId}, #{cName}, #{addDiagnosis}, #{cure}, #{die}, #{addSuspected}, #{reduceSuspected},
-                #{addICU}, #{reduceICU}, CURDATE())
+                #{addICU}, #{reduceICU}, date_sub(curdate(), interval 1 day))
     </insert>
 
+    <!--    查询所有的疫情上报数据-->
     <select id="findAll" resultType="com.sk.yiqingmvc.model.YiQing">
-        select * from yiqing
+        select *
+        from yiqing
+        order by entryDate desc
+    </select>
+
+    <!--    疫情累计信息，包括累计确诊，累计治愈，累计死亡，及疑似数据-->
+    <select id="total" resultType="com.sk.yiqingmvc.model.ChinaYiQing">
+        select IF(sum(addDiagnosis) is NULL, 0, sum(addDiagnosis))       as diagnosis,
+               IF(sum(cure) is NULL, 0, sum(cure))                       as cure,
+               IF(sum(die) is NULL, 0, sum(die))                         as die,
+               IF(sum(addSuspected) is NULL, 0, sum(addSuspected))       as addSuspected,
+               IF(sum(reduceSuspected) is NULL, 0, sum(reduceSuspected)) as reduceSuspected,
+               IF(sum(addICU) is NULL, 0, sum(addICU))                   as addICU,
+               IF(sum(reduceICU) is NULL, 0, sum(reduceICU))             as reduceICU
+        from yiqing
+    </select>
+
+    <!--    查询每天新增的数据，包括确诊，新增，死亡，疑似，重症数据-->
+    <select id="dayAdd" resultType="com.sk.yiqingmvc.model.ChinaYiQing">
+        select IF(sum(addDiagnosis) is NULL, 0, sum(addDiagnosis))       as diagnosis,
+               IF(sum(cure) is NULL, 0, sum(cure))                       as cure,
+               IF(sum(die) is NULL, 0, sum(die))                         as die,
+               IF(sum(addSuspected) is NULL, 0, sum(addSuspected))       as addSuspected,
+               IF(sum(reduceSuspected) is NULL, 0, sum(reduceSuspected)) as reduceSuspected,
+               IF(sum(addICU) is NULL, 0, sum(addICU))                   as addICU,
+               IF(sum(reduceICU) is NULL, 0, sum(reduceICU))             as reduceICU
+        from yiqing
+        where entryDate = date_sub(curdate(), interval 1 day)
+    </select>
+
+    <!--    疫情折线图数据查询，查询14天的数据-->
+    <select id="chinaEcharts" resultType="com.sk.yiqingmvc.model.ChinaYiQing">
+        select IF(sum(addDiagnosis) is NULL, 0, sum(addDiagnosis))       as diagnosis,
+               IF(sum(cure) is NULL, 0, sum(cure))                       as cure,
+               IF(sum(die) is NULL, 0, sum(die))                         as die,
+               IF(sum(addSuspected) is NULL, 0, sum(addSuspected))       as addSuspected,
+               IF(sum(reduceSuspected) is NULL, 0, sum(reduceSuspected)) as reduceSuspected,
+               IF(sum(addICU) is NULL, 0, sum(addICU))                   as addICU,
+               IF(sum(reduceICU) is NULL, 0, sum(reduceICU))             as reduceICU,
+               entryDate
+        from yiqing
+        GROUP BY entryDate
+        LIMIT 14
     </select>
 </mapper>

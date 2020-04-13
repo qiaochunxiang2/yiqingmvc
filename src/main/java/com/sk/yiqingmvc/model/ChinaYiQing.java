@@ -1,9 +1,8 @@
 package com.sk.yiqingmvc.model;
 
-/**
- * @author qiaochunxiang
- * @date 2020/4/12 10:46
- */
+import java.util.Date;
+
+@SuppressWarnings("unused")
 public class ChinaYiQing {
 
     /**
@@ -55,6 +54,11 @@ public class ChinaYiQing {
      * 现有重症
      */
     public Integer nowICU;
+
+    /**
+     * 时间
+     */
+    public Date entryDate;
 
     public Integer getDiagnosis() {
         return diagnosis;
@@ -136,6 +140,14 @@ public class ChinaYiQing {
         this.nowICU = nowICU;
     }
 
+    public Date getEntryDate() {
+        return entryDate;
+    }
+
+    public void setEntryDate(Date entryDate) {
+        this.entryDate = entryDate;
+    }
+
     @Override
     public String toString() {
         return "ChinaYiQing{" +
@@ -149,6 +161,7 @@ public class ChinaYiQing {
                 ", nowDiagnosis=" + nowDiagnosis +
                 ", nowSuspected=" + nowSuspected +
                 ", nowICU=" + nowICU +
+                ", entryDate=" + entryDate +
                 '}';
     }
 }

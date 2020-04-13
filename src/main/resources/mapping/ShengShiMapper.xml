@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sk.yiqingmvc.dao.ShengShiMapper">
+
+    <resultMap id="shengshi1" type="com.sk.yiqingmvc.model.ShengYiQing">
+        <id column="id" property="id"/>
+        <result property="name" column="name"/>
+        <result property="diagnosis" column="addDiagnosis"/>
+        <result property="cure" column="cure"/>
+        <result property="die" column="die"/>
+        <association property="dayAdd" column="id" select="dayAddFind"/>
+        <collection property="child" column="id" ofType="com.sk.yiqingmvc.model.ShiYiQing" select="shiFind"/>
+    </resultMap>
+    <resultMap id="shengshi2" type="com.sk.yiqingmvc.model.ShiYiQing">
+        <id column="id" property="id"/>
+        <result property="name" column="name"/>
+        <result property="diagnosis" column="addDiagnosis"/>
+        <result property="cure" column="cure"/>
+        <result property="die" column="die"/>
+        <association property="dayAdd" column="id" select="shiAdd"/>
+    </resultMap>
+
+    <!--    查询所有的省表格数据，包括现有确诊人数，累计新增，累计治愈，累计死亡-->
+    <select id="yiQingForm" resultMap="shengshi1">
+        select a.id,
+               a.name,
+               IF(sum(c.addDiagnosis) is NULL, 0, sum(c.addDiagnosis)) as addDiagnosis,
+               IF(sum(c.cure) is NULL, 0, sum(c.cure))                 as cure,
+               IF(sum(c.die) is NULL, 0, sum(c.die))                   as die
+        from city a,
+             city b,
+             yiqing c
+        where a.pId = 0
+          and a.id = b.pId
+          and c.cId = b.id
+        group by a.id;
+    </select>
+
+    <!--    获取省昨日新增的确诊人数-->
+    <select id="dayAddFind" resultType="java.lang.Integer">
+        select IF(sum(c.addDiagnosis) is NULL, 0, sum(c.addDiagnosis)) as dayAdd
+        from city a,
+             city b,
+             yiqing c
+        where a.id = b.pId
+          and a.id = #{id}
+          and c.cId = b.id
+          and entryDate = date_sub(curdate(), interval 1 day);
+    </select>
+
+    <!--    获取市表格数据，包括现有确诊人数，累计新增，累计治愈，累计死亡-->
+    <select id="shiFind" resultMap="shengshi2">
+        select b.id,
+               b.name,
+               IF(sum(c.addDiagnosis) is NULL, 0, sum(c.addDiagnosis)) as addDiagnosis,
+               IF(sum(c.cure) is NULL, 0, sum(c.cure))                 as cure,
+               IF(sum(c.die) is NULL, 0, sum(c.die))                   as die
+        from city a,
+             city b,
+             yiqing c
+        where a.id = #{id}
+          and a.id = b.pId
+          and c.cId = b.id
+        group by b.id;
+    </select>
+
+    <!--    获取市昨日新增的数据-->
+    <select id="shiAdd" resultType="java.lang.Integer">
+        select IF(sum(c.addDiagnosis) is NULL, 0, sum(c.addDiagnosis)) as dayAdd
+        from city b,
+             yiqing c
+        where b.id = #{id}
+          and c.cId = b.id
+          and entryDate = date_sub(curdate(), interval 1 day);
+    </select>
+</mapper>

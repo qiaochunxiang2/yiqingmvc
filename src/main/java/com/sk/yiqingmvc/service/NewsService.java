@@ -7,10 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * @author qiaochunxiang
- * @date 2020/4/12 14:26
- */
 @Service
 public class NewsService {
 
@@ -20,9 +16,9 @@ public class NewsService {
     /**
      * 获取所有的新闻
      *
-     * @return  List<News>
+     * @return List<News>
      */
-    public List<News> findAll(){
+    public List<News> findAll() {
         List<News> all = newsMapper.findAll();
         return all;
     }

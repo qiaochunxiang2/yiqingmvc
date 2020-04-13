@@ -3,6 +3,7 @@ package com.sk.yiqingmvc.model;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class City {
     /**
      * 城市id
