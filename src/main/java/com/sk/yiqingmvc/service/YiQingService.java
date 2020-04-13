@@ -6,6 +6,8 @@ import com.sk.yiqingmvc.model.YiQing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -77,4 +79,21 @@ public class YiQingService {
         return chinaYiQings;
     }
 
+
+    /**
+     * 过滤查询
+     * @param jsonData  过滤条件
+     * @return  List<YiQing>
+     */
+    public List<YiQing> queryFilter(Map<String, Object> jsonData){
+        Object date =  jsonData.get("entryDate");
+        if (date instanceof Long){
+            Date eDate = new Date((Long) date);
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String entryDate = format.format(eDate);
+            jsonData.put("entryDate", entryDate);
+        }
+        List<YiQing> yiQings = yiQingMapper.queryFilter(jsonData);
+        return yiQings;
+    }
 }

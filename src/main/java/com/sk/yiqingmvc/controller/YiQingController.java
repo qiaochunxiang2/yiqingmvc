@@ -112,4 +112,22 @@ public class YiQingController {
         }
         return result;
     }
+
+    @PostMapping("yiqingquery")
+    @ApiOperation(value = "过滤查询", notes = "过滤查询")
+    public CommonResult query(@RequestBody Map<String, Object> jsonData) {
+        CommonResult result = new CommonResult();
+        try {
+            List<YiQing> yiQings = yiQingService.queryFilter(jsonData);
+            result.setData(yiQings);
+        } catch (Exception e) {
+            LOGGER.error(e.toString(), e);
+            e.printStackTrace();
+            result.setState(500);
+            result.setData("服务器错误");
+        }
+        return result;
+    }
+
+
 }

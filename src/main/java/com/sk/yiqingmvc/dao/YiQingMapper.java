@@ -5,6 +5,7 @@ import com.sk.yiqingmvc.model.YiQing;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface YiQingMapper {
@@ -44,5 +45,10 @@ public interface YiQingMapper {
      */
     List<ChinaYiQing> chinaEcharts();
 
-
+    /**
+     * 过滤查询，根据日期和城市进行过滤
+     * @param jsonData 条件
+     * @return List<YiQing>
+     */
+    List<YiQing> queryFilter(Map<String, Object> jsonData);
 }

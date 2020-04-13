@@ -38,7 +38,7 @@ public class ShengYiQing {
     /**
      * 市数据
      */
-    List<ShiYiQing> child;
+    List<ShiYiQing> children;
 
     public String getId() {
         return id;
@@ -89,12 +89,12 @@ public class ShengYiQing {
         this.die = die;
     }
 
-    public List<ShiYiQing> getChild() {
-        return child;
+    public List<ShiYiQing> getChildren() {
+        return children;
     }
 
-    public void setChild(List<ShiYiQing> child) {
-        this.child = child;
+    public void setChildren(List<ShiYiQing> children) {
+        this.children = children;
     }
 
     @Override
@@ -106,7 +106,7 @@ public class ShengYiQing {
                 ", diagnosis=" + diagnosis +
                 ", cure=" + cure +
                 ", die=" + die +
-                ", child=" + child +
+                ", children=" + children +
                 '}';
     }
 }

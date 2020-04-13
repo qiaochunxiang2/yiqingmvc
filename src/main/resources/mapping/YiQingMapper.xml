@@ -56,4 +56,15 @@
         GROUP BY entryDate
         LIMIT 14
     </select>
+
+
+    <select id="queryFilter" resultType="com.sk.yiqingmvc.model.YiQing">
+        select * from yiqing where 1=1
+        <if test="cId != null and cId != ''">
+            and cId = #{cId}
+        </if>
+        <if test="entryDate != null and entryDate != ''">
+            and entryDate = #{entryDate}
+        </if>
+    </select>
 </mapper>

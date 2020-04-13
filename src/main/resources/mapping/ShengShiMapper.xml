@@ -9,7 +9,7 @@
         <result property="cure" column="cure"/>
         <result property="die" column="die"/>
         <association property="dayAdd" column="id" select="dayAddFind"/>
-        <collection property="child" column="id" ofType="com.sk.yiqingmvc.model.ShiYiQing" select="shiFind"/>
+        <collection property="children" column="id" ofType="com.sk.yiqingmvc.model.ShiYiQing" select="shiFind"/>
     </resultMap>
     <resultMap id="shengshi2" type="com.sk.yiqingmvc.model.ShiYiQing">
         <id column="id" property="id"/>
